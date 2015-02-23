@@ -27,6 +27,10 @@ module.exports = function(grunt) {
           'public/css/main.css': 'app/styles/main.scss'
         }
       }
+    },
+    watch: {
+        files: [ '**/app' ],
+        tasks: ['build'],
     }
   });
 
