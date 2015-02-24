@@ -3,3 +3,15 @@ h1 {
 		color: blue;
 	}
 }
+
+h2 {
+	p {
+		filter: blur(20px);
+	}
+}
+
+h3  {
+	p {
+		filter: blur(50px);
+	}
+}
