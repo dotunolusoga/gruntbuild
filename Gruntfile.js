@@ -5,7 +5,10 @@ module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
 
   grunt.initConfig({
-    clean: ['public'],
+    clean: {
+      temp: ['.tmp'],
+      dist: ['public']
+    },
     copy: {
       main: {
         files: [
@@ -18,7 +21,7 @@ module.exports = function(grunt) {
       options: {
         port: 8888,
         open: true,
-        useAvailableport: true,
+        useAvailablePort: true,
         hostname: 'localhost'
       },
 
@@ -27,9 +30,9 @@ module.exports = function(grunt) {
           middleware: function (connect) {
             return [
               connect.static('public'),
-              connect.use('/scripts', connect.static('./app/scripts')),
-              connect.use('/bower_components', connect.static('./bower_components'))
-            ]
+              connect().use('/scripts', connect.static('./app/scripts')),
+              connect().use('/bower_components', connect.static('./bower_components'))
+            ];
           }
         }
       },
@@ -53,6 +56,20 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    usemin: {
+      html: ['public/**/*.html']
+    },
+
+    useminPrepare: {
+      html: ['public/index.html'],
+
+      options: {
+        dest: 'public',
+        root: 'app'
+      }
+    },
+
     watch: {
       other: {
         files: [ 'app/**', '!app/**/*.jade', '!app/**/*.{sass,scss}' ],
